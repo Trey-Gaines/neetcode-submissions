@@ -1,0 +1,20 @@
+class Solution {
+    func isValid(_ s: String) -> Bool {
+        let endDic: [Character: Character] = ["}": "{", "]": "[", ")": "("]
+        var stk = [Character]()
+        stk.reserveCapacity(s.length)
+
+        for char in s {
+            if let open = endDic[char] {
+                guard !stk.isEmpty else { continue }
+                if let top = stk.popLast() {
+                    if open != top {
+                        return false
+                    }
+                }
+            }
+            else { stk.append(char) }
+        }
+        return true
+    }
+}
